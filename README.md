@@ -6,6 +6,8 @@ PathoSV estimates Structural Variant (SV) pathogenicity using a 'truncated ratio
 
 PathoSV consists of two components: SV frequency annotation and SV pathogenicity annotation. The frequency annotation script provides the frequency of target SVs in natural populations, helping to filter rare variants. The pathogenicity annotation script evaluates the pathogenicity of variants and genes from four dimensions:1. Genomic annotation;2. Genomic variant constraint scores;3. Transcriptome annotation;4. Pathogenic gene and variant information. These are two independent scripts, and you can use different script combinations as needed.
 
+![PathoSV_components](picture/PathoSV_components.png)
+
 ## Reference files introduction
 SV frequency annotation script use the SVs identified in the natural population cohorts as the background SV set to perform frequency annotation on the submitted SVs. We recommend using a natural population cohort of the same ethnicity as the study cohort as the background SV set, to avoid misclassifying ethnicity-specific common SVs as rare variants. 
 
@@ -28,11 +30,11 @@ python /bin/sv_background_af_annotation.py [-h] [--spid] [--threshold] [--rare] 
 
 #### Input file:
 - backgound: The background SV set to perform frequency annotation on the submitted SVs.
-- sv: The submitted SV file must contain at least 4 columns (CHROM, START, END, SVTYPE) without column headers and may include sample genotype information, with sample IDs to be provided via the "--spid" parameter.
+- sv: The submitted SV file must contain at least 4 columns (CHROM, START, END, SVTYPE) with column headers.
 - o: Output file prefix, including the absolute path and filename prefix.
   
 #### Parameters:
-- spid: If the input SV file contains genotype information, sample IDs can be provided through this parameter, with one sample ID per line.
+- spid: If the input SV file contains genotype information and without column headers, sample IDs can be provided through this parameter, with one sample ID per line.
 - threshold: The cutoff value for filtering rare variants (default: 0.01).
 - rare: Whether to output results containing only rare SVs (default: "True").
 
