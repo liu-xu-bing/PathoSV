@@ -8,6 +8,9 @@ PathoSV consists of two components: SV frequency annotation and SV pathogenicity
 
 ![PathoSV_components](picture/PathoSV_components.png)
 
+## Tool rely on python packages
+Two components are written in python 3 with package numpy and pandas.
+
 ## Reference files introduction
 SV frequency annotation script use the SVs identified in the natural population cohorts as the background SV set to perform frequency annotation on the submitted SVs. We recommend using a natural population cohort of the same ethnicity as the study cohort as the background SV set, to avoid misclassifying ethnicity-specific common SVs as rare variants. 
 
