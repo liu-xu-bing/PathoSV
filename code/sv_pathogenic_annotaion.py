@@ -290,8 +290,8 @@ if select_tissue != "None":
 
     tpm_percent_df = pd.DataFrame({"Sum_truncated_trascript_TPM": tpm_sum_truncated,
                                    "Gene_TPM": tpm_sum_all,
-                                   "Truncated_Ratio": tpm_percent,
-                                   "Top_truncated_trascript_TPM_rank": tpm_rank})
+                                   "TDR": tpm_percent,
+                                   "Top_Truncated_Rank": tpm_rank})
     result_df_tpm_unique.index = range(len(result_df_tpm_unique))
     result_df_tpm_unique_tpm_percent_df = pd.concat([result_df_tpm_unique, tpm_percent_df], axis=1)
 
