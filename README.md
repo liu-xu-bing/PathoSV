@@ -70,7 +70,7 @@ python /bin/sv_pathogenic_annotaion.py [-h] [--gene] [--exon] [--gnocchi] [--cli
 - GENE_TYPE: Gene type in GENCODE.
 - ENST: Transcrpt ENST ID.
 - TRANS_TYPE: Transcrpt type in GENCODE.
-- Consequence: Position of SV in gene, which contains "Overlap all gene"，"Overlap exon"，"Overlap intron"，"Overlap intergenic" 4 types.
+- Consequence: Position of SV in gene, which contains "Gene truncation"，"Exon truncation"，"Intron truncation"，"Intergenic region truncation" 4 types.
 - Gnocchi: Max gnocchi score in SV region. Gnocchi > 4 means SV covers conservative regions.
 - MIM: OMIM ID.
 - Phenotypes: Gene corralation disease and Inheritance of gene in OMIM database.
@@ -81,8 +81,8 @@ python /bin/sv_pathogenic_annotaion.py [-h] [--gene] [--exon] [--gnocchi] [--cli
 - ClinVar_CLNDN: Pathogenic SV corralation disease in ClinVar database.
 - Sum_truncated_trascript_tpm: Total transcripts TPM overlaped by SV.	
 - Gene_tpm: Gene TPM；
-- Truncated_ratio: ∑(TPM of SV-overlapped transcripts) / ∑(Gene TPM). Truncated_ratio >0.25 means pathogenic.
-- Top_truncated_trascript_TPM_rank: The top TPM of SV-overlapped transcripts in all transcripts of gene.
+- TDR: ∑(TPM of SV-overlapped transcripts) / ∑(Gene TPM). Truncated_ratio >0.25 means pathogenic.
+- Top_Truncated_Rank: The top TPM of SV-overlapped transcripts in all transcripts of gene.
 
 #### Output files:
 - If transcriptom annotation is used, the output file will be [output]\_annotation\_[tissue]_transcript_tpm_truncated_percent.txt. Each row records the information of SV-GENE, without "ENST" and "TRANS_TYPE" columns.
