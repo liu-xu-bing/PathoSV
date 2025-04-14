@@ -165,7 +165,7 @@ for i in range(len(sv_info)):
                     tmp_IND.append(tmp_sv.IND)
                     tmp_SYMBOL.append(tmp_overlap_gene_list.loc[j, "SYMBOL"])
                     tmp_GENE_TYPE.append(tmp_overlap_gene_list.loc[j, "GENE_TYPE"])
-                    tmp_Consequence.append("Overlap all gene")
+                    tmp_Consequence.append("Gene truncation")
                     tmp_ENSG.append(tmp_overlap_gene_list.loc[j, "ENSG"])
                     tmp_ENST.append(k)
                     tmp_TRANS_TYPE.append(tmp_hg38_exon.loc[tmp_hg38_exon.ENST == k, "TRANS_TYPE"].unique().tolist()[0])
@@ -192,7 +192,7 @@ for i in range(len(sv_info)):
                         tmp_IND.append(tmp_sv.IND)
                         tmp_SYMBOL.append(tmp_overlap_gene_list.loc[j, "SYMBOL"])
                         tmp_GENE_TYPE.append(tmp_overlap_gene_list.loc[j, "GENE_TYPE"])
-                        tmp_Consequence.append("Overlap " + str(", ".join(m for m in tmp_hg38_exon.loc[tmp_hg38_exon.ENST == k, "CLASS"].unique())))
+                        tmp_Consequence.append("Exon truncation")
                         tmp_ENSG.append(tmp_overlap_gene_list.loc[j, "ENSG"])
                         tmp_ENST.append(k)
                         tmp_TRANS_TYPE.append(tmp_hg38_exon.loc[tmp_hg38_exon.ENST == k, "TRANS_TYPE"].unique().tolist()[0])
@@ -209,7 +209,7 @@ for i in range(len(sv_info)):
                     tmp_IND.append(tmp_sv.IND)
                     tmp_SYMBOL.append(tmp_overlap_gene_list.loc[j, "SYMBOL"])
                     tmp_GENE_TYPE.append(tmp_overlap_gene_list.loc[j, "GENE_TYPE"])
-                    tmp_Consequence.append("Overlap intron")
+                    tmp_Consequence.append("Intron truncation")
                     tmp_ENSG.append(tmp_overlap_gene_list.loc[j, "ENSG"])
                     tmp_ENST.append("-")
                     tmp_TRANS_TYPE.append("-")
@@ -227,7 +227,7 @@ for i in range(len(sv_info)):
         tmp_IND.append(tmp_sv.IND)
         tmp_SYMBOL.append("-")
         tmp_GENE_TYPE.append("-")
-        tmp_Consequence.append("Overlap intergenic")
+        tmp_Consequence.append("Intergenic region truncation")
         tmp_ENSG.append("-")
         tmp_ENST.append("-")
         tmp_TRANS_TYPE.append("-")
@@ -253,7 +253,6 @@ del(result_anno_df)
 if select_tissue != "None":
     result_df_tpm = pd.merge(left=result_df, right=transcript_tpm[["ENST", select_tissue]], on="ENST", how="left")
 
-    result_df_tpm.loc[result_df_tpm.Consequence.str.contains("exon"),"Consequence"] = "Overlap exon"
     result_df_tpm_unique = result_df_tpm[sv_info.columns.tolist() + ["SYMBOL", "ENSG", "GENE_TYPE", "Consequence", "Gnocchi","MIM","Phenotypes","GO_MF", "GO_BP", "GO_CC","ClinVar_CLNSIG", "ClinVar_CLNDN", "ClinVar_ALLELEID"]].drop_duplicates()
     result_df_tpm_unique.index = range(len(result_df_tpm_unique))
 
@@ -263,7 +262,7 @@ if select_tissue != "None":
     tpm_rank = []
 
     for i in range(len(result_df_tpm_unique)):
-        if (result_df_tpm_unique.loc[i,"Consequence"] != "Overlap intron") & (result_df_tpm_unique.loc[i,"Consequence"] != "Overlap intergenic"):
+        if (result_df_tpm_unique.loc[i,"Consequence"] != "Intron truncation") & (result_df_tpm_unique.loc[i,"Consequence"] != "Intergenic region truncation"):
             tmp_trans_tpm_df = result_df_tpm.loc[(result_df_tpm.IND == result_df_tpm_unique.iloc[i,:].IND) & (result_df_tpm.ENSG == result_df_tpm_unique.iloc[i,:].ENSG), ["ENST", select_tissue]].drop_duplicates().copy()
             tmp_gene_tpm_df = transcript_tpm.loc[transcript_tpm.ENSG == result_df_tpm_unique.iloc[i,:].ENSG, ["ENST", select_tissue]]
             tmp_sum_truncated = round(tmp_trans_tpm_df[select_tissue].sum(),3)
