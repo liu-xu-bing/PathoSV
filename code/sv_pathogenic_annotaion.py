@@ -106,7 +106,7 @@ for i in range(len(sv_info)):
     elif tmp_sv.SVTYPE in ["DUP", "Duplication", "copy_number_gain"]:
         tmp_clinvar_info = tmp_clinvar_info[tmp_clinvar_info.SVTYPE.isin(["Duplication", "copy_number_gain"])]
     elif tmp_sv.SVTYPE in ["INS", "Insertion", "copy_number_gain"]:
-        tmp_clinvar_info = tmp_clinvar_info[tmp_clinvar_info.SVTYPE == "Insertion")]
+        tmp_clinvar_info = tmp_clinvar_info[tmp_clinvar_info.SVTYPE == "Insertion"]
     else:
         logger.error("SVTYPE is unrecognizable")
         
